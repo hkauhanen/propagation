@@ -32,13 +32,16 @@ simucon <- function(N,
   changed <- rep(0, iter+1)
   changed[1] <- 1
 
-  # loop; at iteration we pick one speaker to update
+  # loop; at each iteration we pick one speaker to update
   for (t in 1:iter) {
     G1speakers <- state[t]/N
     G2speakers <- (N - state[t])/N
+
     birthprob <- (1-s)*G1speakers*G2speakers*alpha + s*G1speakers*G1speakers*G2speakers
-    deathprob <- (1-s)*G1speakers*G2speakers*beta + s*G2speakers*G2speakers*G1speakers
+    deathprob <- (1-s)*G1speakers*G2speakers*beta + s*G2speakers*G1speakers*G2speakers
+    
     action <- sample(c("birth", "death", "nothing"), size=1, prob=c(birthprob, deathprob, 1 - birthprob - deathprob))
+    
     if (action == "birth") {
       state[t+1] <- state[t] + 1
       if (t %% reso == 1 || t == iter) {
@@ -78,6 +81,5 @@ afewsimus <- function(rep = 10,
                       beta = 0.1,
                       s = 0.1,
                       iter = 300000) {
-  df <- do.call(rbind, lapply(X=1:rep, FUN=function(X) { simucon(N=N, Ninn=Ninn, alpha=alpha, beta=beta, s=s, iter=iter, id=X, reso=10, scaletime=TRUE) }))
-  df
+  do.call(rbind, lapply(X=1:rep, FUN=function(X) { simucon(N=N, Ninn=Ninn, alpha=alpha, beta=beta, s=s, iter=iter, id=X, reso=10, scaletime=TRUE) }))
 }
