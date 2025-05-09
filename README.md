@@ -1,5 +1,7 @@
 # propagation
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15375992.svg)](https://doi.org/10.5281/zenodo.15375992)
+
 Simulation (and visualization) code for a simple stochastic birth-death process.
 
 Used to produce Figure 9 in 
