@@ -15,7 +15,7 @@ R and pdflatex with tikz.
 ## Usage
 
 ```
-Rscript simulations.R
+Rscript batch.R
 pdflatex stochastic.tex
 ```
 
