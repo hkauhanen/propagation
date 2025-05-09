@@ -1,0 +1,52 @@
+\documentclass[margin=0.5cm]{standalone}
+
+\input{preamble.tex}
+%\usepackage{pgfplots}
+
+\begin{document}
+
+\begin{tikzpicture}
+\usetikzlibrary{datavisualization}
+\usetikzlibrary {datavisualization.formats.functions}
+
+	\datavisualization [
+  scientific axes,
+  x axis={attribute=t, ticks,
+    label={time $t$}},
+  y axis={attribute=x, ticks,
+		label={abundance $x(t)$},
+		include value=0,
+		include value=1},
+  all axes=grid,
+  visualize as line=1,
+  visualize as line=2,
+  visualize as line=3,
+  visualize as line=4,
+  visualize as line=5,
+  visualize as line=6,
+  visualize as line=7,
+  visualize as line=8,
+  visualize as line=9,
+  visualize as line=10,
+  1={style=black!60},
+  2={style=black!60},
+  3={style=black!60},
+  4={style=black!60},
+  5={style=black!60},
+  6={style=black!60},
+  7={style=black!60},
+  8={style=black!60},
+  9={style=black!60},
+  10={style=black!60},
+]
+data[read from file=results.csv];
+
+% horizontal line at x=0.05 (invasion barrier); for some
+% reason the tikz axis scales are all off and this occurs
+% at 3.09 * 0.05 = 0.1545
+\draw[very thick,dashed,black] (0,0.1545) -- (5,0.1545);
+
+\end{tikzpicture}
+
+
+\end{document}
